@@ -9,6 +9,15 @@ claimed = {}
 
 isXturn = True
 
+def enableUnclaimed(abet):
+    if abet in claimed:
+        disableGrid(abet)
+    else:
+        for i in range (0, 9):
+            id = f"{abet}{i}"
+            buttons[id].config(state = tk.NORMAL)
+            buttons[id].config(bg="#ffffff")
+
 def disableGrid(alphabet):
     for i in range (0, 9):
         id = f"{alphabet}{i}"
@@ -37,7 +46,6 @@ def checkGrid(alpha):
             claimed[f"{alpha}"] = "O"
             disableGrid(alpha)
 
-
 def checkAll():
     for i in alphabets:
         checkGrid(i)
@@ -60,6 +68,9 @@ def disableOthers(id: str):
         if not i[0] == alpha or alpha in claimed:
             buttons[i].config(state = tk.DISABLED)
             buttons[i].config(bg="#808080")
+            if alpha in claimed:
+                for j in alphabets:
+                    enableUnclaimed(j)
         else:
             buttons[i].config(state = tk.NORMAL)
             buttons[i].config(bg="#ffffff")
