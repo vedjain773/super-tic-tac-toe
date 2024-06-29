@@ -9,6 +9,14 @@ claimed = {}
 
 isXturn = True
 
+def checkDiag(alpha, letter):
+    if (aBT(f"{alpha}0") == aBT(f"{alpha}4") == aBT(f"{alpha}8") == letter):
+        return True
+    elif (aBT(f"{alpha}2") == aBT(f"{alpha}4") == aBT(f"{alpha}6") == letter):
+        return True
+    else:
+        return False
+
 def enableUnclaimed(abet):
     if abet in claimed:
         disableGrid(abet)
@@ -28,6 +36,14 @@ def aBT(id: str):
     return buttons[id].cget("text")
 
 def checkGrid(alpha):
+    
+    if checkDiag(alpha, "X"):
+        claimed[f"{alpha}"] = "X"
+        disableGrid(alpha)
+    elif checkDiag(alpha, "O"):
+        claimed[f"{alpha}"] = "O"
+        disableGrid(alpha)
+    
     rows = [0, 3, 6]
     columns = [0, 1, 2]
     for row in rows:
