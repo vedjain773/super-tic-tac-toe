@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 root = tk.Tk()
 root.title("Super Tic-Tac-Toe")
@@ -8,6 +9,23 @@ buttons = {}
 claimed = {}
 
 isXturn = True
+
+def checkThreeClaimed(a, b, c):
+    if (a in claimed and b in claimed and c in claimed):
+        if (claimed[a] == claimed[b] == claimed[c]):
+            messagebox.showinfo("GAME OVER", f"{claimed[a]} won the game")
+        
+
+def checkWinner():
+    if len(claimed) >= 3:
+       checkThreeClaimed("a", "b", "c")
+       checkThreeClaimed("d", "e", "f")
+       checkThreeClaimed("g", "h", "i")
+       checkThreeClaimed("a", "d", "g")
+       checkThreeClaimed("b", "e", "h")
+       checkThreeClaimed("c", "f", "i")
+       checkThreeClaimed("a", "e", "i")
+       checkThreeClaimed("c", "e", "g")
 
 def checkDiag(alpha, letter):
     if (aBT(f"{alpha}0") == aBT(f"{alpha}4") == aBT(f"{alpha}8") == letter):
